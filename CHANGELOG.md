@@ -4,12 +4,10 @@
 
 ### Added or Changed
 - Added this changelog :)
-- Fixed typos in both templates
+- Fixed typos
 - Back to top links
-- Added more "Built With" frameworks/libraries
-- Changed table of contents to start collapsed
-- Added checkboxes for major features on roadmap
+- Updated my "Built With" frameworks/libraries
 
 ### Removed
 
-- Some packages/libraries from acknowledgements I no longer use
+- Some packages/libraries I no longer use
