@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will you be Mine?</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="gifContainer" class="gifContainer">
+    <img src="bunny-yes.gif" alt="bunnydancingGIF">
+  </div>
+
+<div class="box">
+  <div class="head">
+    <div class="ear-left">
+      <div class="inner-ear"></div>
+    </div>
+    <div class="ear-right">
+      <div class="inner-ear"></div>
+    </div>
+    <div class="eye-left animated pulse">
+      <div class="pupil animated pulse"></div>
+      <div class="tears animated pulse"></div>
+    </div>
+    <div class="eye-right animated pulse">
+      <div class="pupil2 animated pulse"></div>
+      <div class="tears2 animated pulse"></div>
+    </div>
+    <div class="nose">
+      <div class="line"></div>
+    </div>
+    <div class="blush-left"></div>
+    <div class="blush-right"></div>
+    <div class="mouth-no">
+  </div>
+</div>
+
+<div class="bemine"><h2>Will you Be mine?</h2>
+
+  <span>
+    <button id="yesButton">Yes</button>
+    <button id="noButton">NO</button>
+  </span>
+</div>
+
+</div>
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  const yesButton = document.getElementById('yesButton');
+  const noButton = document.getElementById('noButton');
+  const gifContainer = document.getElementById('gifContainer');
+
+  yesButton.addEventListener('click', function() {
+    console.log('Yes button clicked');
+    document.querySelectorAll('.box').forEach(function(element) {
+      element.style.display = 'none';
+    });
+    gifContainer.style.display = 'block';
+  });
+
+  // There is probably a much better way to do this.
+  // I'm still learning. I will refactor this in the future
+  function moveButtonAndTriggerNoActions() {
+    const earLeft = document.querySelector('.ear-left');
+    const earRight = document.querySelector('.ear-right');
+    earLeft.classList.remove('ear-left');
+    earLeft.classList.add('ear-left-no');
+    earRight.classList.remove('ear-right');
+    earRight.classList.add('ear-right-no');
+
+    const eyeLeft = document.querySelector('.eye-left');
+    const eyeRight = document.querySelector('.eye-right');
+    const pupil = document.querySelector('.pupil');
+    const tears = document.querySelector('.tears');
+    const pupil2 = document.querySelector('.pupil2');
+    const tears2 = document.querySelector('.tears2');
+    const mouth = document.querySelector('.mouth-no');
+    eyeLeft.classList.remove('eye-left');
+    eyeLeft.classList.add('eye-left-cry');
+    eyeRight.classList.remove('eye-right');
+    eyeRight.classList.add('eye-right-cry');
+    pupil.classList.remove('pupil');
+    pupil.classList.add('tears-cry');
+    tears.classList.remove('tears');
+    tears.classList.add('tears-cry-2');
+    pupil2.classList.remove('pupil2');
+    pupil2.classList.add('tears-cry');
+    tears2.classList.remove('tears2');
+    tears2.classList.add('tears-cry-2');
+    mouth.classList.remove('mouth-no');
+    mouth.classList.add('mouth');
+  }
+
+  const button = document.getElementById("noButton");
+  const buttonWidth = 750;
+  const buttonHeight = 750;
+
+  const animateMove = (element, prop, pixels) =>
+    anime({
+      targets: element,
+      [prop]: `${pixels}px`,
+      easing: "easeOutCirc"
+    });
+
+  ["mouseover", "click"].forEach(function(el) {
+    button.addEventListener(el, function(event) {
+      const top = getRandomNumber(buttonHeight);
+      const left = getRandomNumber(buttonWidth);
+
+      const boundedTop = Math.max(0, Math.min(top, buttonHeight));
+      const boundedLeft = Math.max(0, Math.min(left, buttonWidth));
+
+      animateMove(this, "left", boundedLeft).play();
+      animateMove(this, "top", boundedTop).play();
+
+      moveButtonAndTriggerNoActions();
+    });
+  });
+
+  const getRandomNumber = (num) => {
+    return Math.floor(Math.random() * num);
+  };
+});
+
+
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.js"></script>
+
+</body>
+</html>
