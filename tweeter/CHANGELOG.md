@@ -10,6 +10,7 @@
 ### Removed
 
 - Removed Django forms that didnt work with our custom forms
+- Removed credentials that github ignore did not block
 
 ### Issues/
 
