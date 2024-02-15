@@ -10,7 +10,7 @@
 <br />
 <div align="center">
 
-  <img src="https://github.com/CameronCSS/test-projects/assets/121735588/2db0216a-bc67-47d7-a3d3-4f55ab4c2997" alt="Logo" height="80">
+  <img src="https://github.com/CameronCSS/test-projects/assets/121735588/2db0216a-bc67-47d7-a3d3-4f55ab4c2997" alt="Logo" height="150">
 
   <h3 align="center">My Test-Projects</h3>
 
