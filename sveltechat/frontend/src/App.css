@@ -88,3 +88,16 @@ body {
   color: white; 
   background: rgb(43, 47, 60);
 }
+
+.ce-chat-list {
+  overflow: auto !important;
+}
+
+.ce-chat-feed {
+  overflow: auto !important;
+}
+
+.ce-message-list {
+  overflow: auto !important;
+}
+
