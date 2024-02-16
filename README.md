@@ -106,7 +106,7 @@ Distributed under the MIT License. See [`LICENSE.txt`](https://github.com/Camero
 [linkedin-url]: https://www.linkedin.com/in/cameron-css/
 [product-screenshot]: https://github.com/CameronCSS/test-projects/assets/121735588/5c2c05ed-dfef-4262-b0fe-59942e1ac871
 [Node.js]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
-[Node-url]: https://nextjs.org/](https://nodejs.org/en
+[Node-url]: https://nodejs.org/en
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
