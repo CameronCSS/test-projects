@@ -61,34 +61,16 @@ function fetchProduct() {
                 const productUrlElement = document.createElement('a');
                 productUrlElement.href = productUrl;
                 productUrlElement.textContent = 'View Product';
+
                 
-
-
-        // get Best buy info
-        fetch(`https://api.bestbuy.com/v1/products(modelNumber=${partNumber})?apiKey=${apiKey}&sort=salePrice.asc&show=salePrice&format=json`)
-        .then(res => res.json())
-        .then(bbdata => {
-            console.log(bbdata.products[0].salePrice);
-
-            const bestBuyPrice = bbdata.products[0].salePrice;
-            const bestBuyPriceElement = document.createElement('p');
-
-            bestBuyPriceElement.textContent = `Best Buy Price: $${bestBuyPrice}`;
-            
-            
-
-            productInfoDiv.appendChild(imgElement);
-            productInfoDiv.appendChild(brandElement);
-            productInfoDiv.appendChild(priceElementDisplay);
-            productInfoDiv.appendChild(bestBuyPriceElement);
-            productInfoDiv.appendChild(partNumberElement);
-            productInfoDiv.appendChild(skuElement);
-            productInfoDiv.appendChild(descriptionElement);
-            productInfoDiv.appendChild(ratingElement);
-            productInfoDiv.appendChild(productUrlElement);
-
-        
-        })
+                productInfoDiv.appendChild(imgElement);
+                productInfoDiv.appendChild(brandElement);
+                productInfoDiv.appendChild(priceElementDisplay);
+                productInfoDiv.appendChild(descriptionElement);
+                productInfoDiv.appendChild(skuElement);
+                productInfoDiv.appendChild(partNumberElement);
+                productInfoDiv.appendChild(ratingElement);
+                productInfoDiv.appendChild(productUrlElement);
         })
         } else {
             console.error('No product found for SKU:', SKU);
@@ -101,4 +83,3 @@ function fetchProduct() {
         productInfoDiv.textContent = 'Error fetching product.';
     });
 }
-
