@@ -1,3 +1,5 @@
+apiKey = 'bb_api_key'
+
 function fetchProduct() {
     const skuInput = document.getElementById('skuInput');
     const SKU = skuInput.value.trim();
@@ -38,7 +40,7 @@ function fetchProduct() {
                 imgElement.alt = description;
 
                 const priceElementDisplay = document.createElement('p');
-                priceElementDisplay.textContent = `Price: ${price}`;
+                priceElementDisplay.textContent = `RC Willey Price: $${price}`;
 
                 const brandElement = document.createElement('p');
                 brandElement.textContent = `Brand: ${brand}`;
@@ -47,7 +49,7 @@ function fetchProduct() {
                 descriptionElement.textContent = `Description: ${description}`;
 
                 const skuElement = document.createElement('p');
-                skuElement.textContent = `SKU: ${sku}`;
+                skuElement.textContent = `RC Willey SKU: ${sku}`;
 
                 const partNumberElement = document.createElement('p');
                 partNumberElement.textContent = `Manufacturer Part Number: ${partNumber}`;
@@ -59,16 +61,34 @@ function fetchProduct() {
                 const productUrlElement = document.createElement('a');
                 productUrlElement.href = productUrl;
                 productUrlElement.textContent = 'View Product';
-
                 
-                productInfoDiv.appendChild(imgElement);
-                productInfoDiv.appendChild(brandElement);
-                productInfoDiv.appendChild(priceElementDisplay);
-                productInfoDiv.appendChild(descriptionElement);
-                productInfoDiv.appendChild(skuElement);
-                productInfoDiv.appendChild(partNumberElement);
-                productInfoDiv.appendChild(ratingElement);
-                productInfoDiv.appendChild(productUrlElement);
+
+
+        // get Best buy info
+        fetch(`https://api.bestbuy.com/v1/products(modelNumber=${partNumber})?apiKey=${apiKey}&sort=salePrice.asc&show=salePrice&format=json`)
+        .then(res => res.json())
+        .then(bbdata => {
+            console.log(bbdata.products[0].salePrice);
+
+            const bestBuyPrice = bbdata.products[0].salePrice;
+            const bestBuyPriceElement = document.createElement('p');
+
+            bestBuyPriceElement.textContent = `Best Buy Price: $${bestBuyPrice}`;
+            
+            
+
+            productInfoDiv.appendChild(imgElement);
+            productInfoDiv.appendChild(brandElement);
+            productInfoDiv.appendChild(priceElementDisplay);
+            productInfoDiv.appendChild(bestBuyPriceElement);
+            productInfoDiv.appendChild(partNumberElement);
+            productInfoDiv.appendChild(skuElement);
+            productInfoDiv.appendChild(descriptionElement);
+            productInfoDiv.appendChild(ratingElement);
+            productInfoDiv.appendChild(productUrlElement);
+
+        
+        })
         })
         } else {
             console.error('No product found for SKU:', SKU);
@@ -81,3 +101,4 @@ function fetchProduct() {
         productInfoDiv.textContent = 'Error fetching product.';
     });
 }
+
