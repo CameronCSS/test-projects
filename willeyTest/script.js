@@ -1,10 +1,8 @@
-import puppeteer from "puppeteer";
-
 const apiKey = 'api-key';
 
-let partNumber;
+export let partNumber;
 
-function fetchProduct() {
+export function fetchProduct() {
     const skuInput = document.getElementById('skuInput');
     const SKU = skuInput.value.trim();
     const productInfoDiv = document.getElementById('productInfo');
@@ -13,7 +11,6 @@ function fetchProduct() {
     fetch(`https://api.bazaarvoice.com/data/products.json?resource=products&filter=id%3Aeq%3A${SKU}&filter_reviews=contentlocale%3Aeq%3Aen_US%2Cen_US&filter_reviewcomments=contentlocale%3Aeq%3Aen_US%2Cen_US&filteredstats=Reviews&stats=Reviews&passkey=ca0ZAkfdZxSr0Kz1CN2pNhGv5SCbL4vH65jFUbi0LSHpM&apiversion=5.5&displaycode=0593-en_us`)
     .then(res => res.json())
     .then(data => {
-        console.log(data);
 
         if (data.Results && data.Results.length > 0) {
             const description = data.Results[0].Description;
@@ -36,7 +33,6 @@ function fetchProduct() {
 
                 const priceElement = tempDiv.querySelector('.price');
                 const price = priceElement ? priceElement.textContent.trim() : 'Price not found';
-                console.log(price)
 
 
                 const imgElement = document.createElement('img');
@@ -57,6 +53,7 @@ function fetchProduct() {
 
                 const partNumberElement = document.createElement('p');
                 partNumberElement.textContent = `Manufacturer Part Number: ${partNumber}`;
+                partNumberElement.id = 'partNumber';
 
                 const ratingElement = document.createElement('p');
                 const roundedRatingScore = parseFloat(ratingScore).toFixed(2);
@@ -71,7 +68,6 @@ function fetchProduct() {
         fetch(`https://api.bestbuy.com/v1/products(modelNumber=${partNumber})?apiKey=${apiKey}&sort=salePrice.asc&show=salePrice&format=json`)
         .then(res => res.json())
         .then(bbdata => {
-            console.log(bbdata.products[0].salePrice);
 
             const bestBuyPrice = bbdata.products[0].salePrice;
             const bestBuyPriceElement = document.createElement('p');
@@ -90,10 +86,8 @@ function fetchProduct() {
             productInfoDiv.appendChild(ratingElement);
             productInfoDiv.appendChild(productUrlElement);
 
-            main();
 
         })
-        console.log(partNumber);
         return partNumber;
         })
         } else {
@@ -110,24 +104,4 @@ function fetchProduct() {
 }
 
 
-const main = async () => {
-    const browser = await puppeteer.launch({ headless: true });
-    const page = await browser.newPage();
-    
-    await page.goto(url, { timeout: 10000 });
-
-    const pricing = await page.evaluate(() => {
-        const priceElement = document.querySelector('.price');
-        const price = priceElement ? priceElement.textContent.trim() : 'Price not found';
-        return price;
-    });
-
-    console.log('Home Depot Price:', pricing);
-
-    await browser.close();
-}
-
 document.getElementById('getInfoButton').addEventListener('click', fetchProduct);
-
-
-export { fetchProduct, partNumber };
