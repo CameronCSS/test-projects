@@ -1,4 +1,8 @@
-apiKey = 'bb_api_key'
+import puppeteer from "puppeteer";
+
+const apiKey = 'api-key';
+
+let partNumber;
 
 function fetchProduct() {
     const skuInput = document.getElementById('skuInput');
@@ -15,7 +19,7 @@ function fetchProduct() {
             const description = data.Results[0].Description;
             const brand = data.Results[0].Brand.Name;
             const sku = data.Results[0].Id;
-            const partNumber = data.Results[0].ManufacturerPartNumbers[0];
+            partNumber = data.Results[0].ManufacturerPartNumbers[0];
             const imgUrl = data.Results[0].ImageUrl;
             const ratingScore = data.Results[0].ReviewStatistics.AverageOverallRating;
             const totalRating = data.Results[0].ReviewStatistics.TotalReviewCount;
@@ -63,14 +67,34 @@ function fetchProduct() {
                 productUrlElement.textContent = 'View Product';
 
                 
-                productInfoDiv.appendChild(imgElement);
-                productInfoDiv.appendChild(brandElement);
-                productInfoDiv.appendChild(priceElementDisplay);
-                productInfoDiv.appendChild(descriptionElement);
-                productInfoDiv.appendChild(skuElement);
-                productInfoDiv.appendChild(partNumberElement);
-                productInfoDiv.appendChild(ratingElement);
-                productInfoDiv.appendChild(productUrlElement);
+        // get Best buy info
+        fetch(`https://api.bestbuy.com/v1/products(modelNumber=${partNumber})?apiKey=${apiKey}&sort=salePrice.asc&show=salePrice&format=json`)
+        .then(res => res.json())
+        .then(bbdata => {
+            console.log(bbdata.products[0].salePrice);
+
+            const bestBuyPrice = bbdata.products[0].salePrice;
+            const bestBuyPriceElement = document.createElement('p');
+
+            bestBuyPriceElement.textContent = `Best Buy Price: $${bestBuyPrice}`;
+
+
+
+            productInfoDiv.appendChild(imgElement);
+            productInfoDiv.appendChild(brandElement);
+            productInfoDiv.appendChild(priceElementDisplay);
+            productInfoDiv.appendChild(bestBuyPriceElement);
+            productInfoDiv.appendChild(partNumberElement);
+            productInfoDiv.appendChild(skuElement);
+            productInfoDiv.appendChild(descriptionElement);
+            productInfoDiv.appendChild(ratingElement);
+            productInfoDiv.appendChild(productUrlElement);
+
+            main();
+
+        })
+        console.log(partNumber);
+        return partNumber;
         })
         } else {
             console.error('No product found for SKU:', SKU);
@@ -82,4 +106,28 @@ function fetchProduct() {
         console.error('Error fetching product:', error);
         productInfoDiv.textContent = 'Error fetching product.';
     });
+    
 }
+
+
+const main = async () => {
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+    
+    await page.goto(url, { timeout: 10000 });
+
+    const pricing = await page.evaluate(() => {
+        const priceElement = document.querySelector('.price');
+        const price = priceElement ? priceElement.textContent.trim() : 'Price not found';
+        return price;
+    });
+
+    console.log('Home Depot Price:', pricing);
+
+    await browser.close();
+}
+
+document.getElementById('getInfoButton').addEventListener('click', fetchProduct);
+
+
+export { fetchProduct, partNumber };
