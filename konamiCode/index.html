@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Key Detection</title>
+    <script type="text/javascript" src="./cornify.js"></script>
+    <link rel="icon" href="https://fav.farm/🔥" />
+    <!-- 8 bit Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <script>
+        let pressed = [];
+        const secretCode = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightbaEnter';
+        window.addEventListener('keyup', (e) => {
+            console.log(e.key);
+            pressed.push(e.key);
+            let pressedSequence = pressed.slice(-secretCode.length).join('');
+            if (pressedSequence === secretCode) {
+                console.log('YOU DID IT!!');
+                cornify_add();
+                pressed = [];
+                pressedSequence = '';
+                cornify_count = 0;
+            }
+            console.log(pressed);
+        })
+    </script>
+  </body>
+</html>
