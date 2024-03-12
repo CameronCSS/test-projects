@@ -11,7 +11,7 @@
 			<label for="password">Password</label>
           <input name="password" type="password" required placeholder="Password" />
         </div>
-        <p class="forgot"><a href="https://www.web-leb.com/code">Forgot Password?</a></p>
+        <p class="forgot"><a href="/forgotpass">Forgot Password?</a></p>
         <button class="button button-block">Login</button>
       </form>
     </div>
