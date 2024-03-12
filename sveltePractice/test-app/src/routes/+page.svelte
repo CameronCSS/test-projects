@@ -29,17 +29,18 @@
 </script>
 
 <style>
+
     *, h1 {
         display: inline-block;
     }
 
     p {
-        color: #F7FF0C;
         font-family: 'Comic Sans MS', cursive;
         font-size: 1.5em;
         display: block;
     }
 </style>
+
 
 <br>
 <h1>Welcome to SvelteKit</h1>

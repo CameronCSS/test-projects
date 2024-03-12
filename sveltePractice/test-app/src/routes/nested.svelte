@@ -1,6 +1,5 @@
 <style>
 	p {
-		color: #f5f5f7;
 		font-family: 'Comic Sans MS', cursive;
 		font-size: 1.5em;
 	}
