@@ -4,8 +4,7 @@
 
 ### Added or Changed
 - Added base HTML from #Javascript30
-- Added basic functions to capture click events
-- used stoppropagation and capture to pick exactly what div we want
+- 
 
 ### Removed
 
