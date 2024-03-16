@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.1.0
+
+### Added or Changed
+- Finished javascript 30 course
+- Added all the js30 projects to the test projects repo
+
+### Removed
+
+- N/A
+
+### Issues
+
+- No Known issues
+
+---
+
 ## v1.0.0
 
 ### Added or Changed
